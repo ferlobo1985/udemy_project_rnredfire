@@ -1,3 +1,4 @@
+import { firebase } from './fbase/firebase';
 import React,{ useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Formik } from 'formik';
@@ -7,14 +8,27 @@ import { Input,Button,CheckBox } from 'react-native-elements';
 const Authenticate = () => {
     const [register,setRegister] = useState(false)
 
-    const handleSubmit =  (values) => {
-        if(register){
-            //register
-            alert('register')
-        } else {
-            //log in
-            alert('log in')
+    const handleSubmit = async({email,password}) => {
+        try {
+            if(register){
+                //register
+               const response = await firebase.auth()
+               .createUserWithEmailAndPassword(email,password);
+               const {user} = response;
+               console.log(user);
+            } else {
+                //log in
+               const response = await firebase.auth()
+               .signInWithEmailAndPassword(email,password);
+
+               const {user} = response;
+               console.log(user);
+            }
+
+        } catch(error) {
+            console.log(error);
         }
+       
     }
 
     return(
