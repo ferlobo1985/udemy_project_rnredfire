@@ -4,13 +4,15 @@ import { Header } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { getArticles } from './src/store/actions';
 
-const App = ()=>{
-  const articles = useSelector(state => state.articles);
-  const dispatch = useDispatch();
+import Authenticate from './src/authenticate';
 
-  useEffect(()=>{
-    dispatch(getArticles())
-  },[dispatch])
+const App = ()=>{
+  // const articles = useSelector(state => state.articles);
+  // const dispatch = useDispatch();
+
+  // useEffect(()=>{
+  //   dispatch(getArticles())
+  // },[dispatch])
 
   return (
     <View>
@@ -19,7 +21,8 @@ const App = ()=>{
         centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
         rightComponent={{ icon: 'home', color: '#fff' }}
       />
-      <Text>Hello</Text>
+      {/* <Text>Hello</Text> */}
+      <Authenticate/>
     </View>
   );
 }
